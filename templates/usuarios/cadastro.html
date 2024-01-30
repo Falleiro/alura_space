@@ -21,10 +21,16 @@
     <div class="pagina-inicial">
         <header class="cabecalho">
             <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
+            {% for message in messages %}
+            <div class="alert alert-primary">
+                <p id="messages">{{message}}</p>
+            </div>
+            {% endfor %}
             <div class="cabecalho__busca">
                 <div class="busca__fundo">
                     <form action="{% url 'buscar' %}">
-                        <input class="busca__input" type="text" name="buscar" placeholder="O que você procura?">
+                        <input style="color: white;" class="busca__input" type="text" name="buscar"
+                            placeholder="O que você procura?">
                         <button type="submit">
                             <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}"
                                 alt="ícone de search">
@@ -41,11 +47,12 @@
                         Login</a>
                     <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
                         Cadastrar</a>
-                    <a href="#"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
+                    <a href="{% url 'logout' %}"><img
+                            src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
                 </nav>
             </section>
             <section class="galeria" style="margin-left: 5em">
-                <form action="" method="">
+                <form action="{% url 'cadastro' %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
                         {% for field in form.visible_fields %}
